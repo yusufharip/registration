@@ -23,6 +23,7 @@ class RegistrationForm extends React.Component {
         this.handleEmail = this.handleEmail.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGender = this.handleGender.bind(this);
+        this.handleDeleteWarning = this.handleDeleteWarning.bind(this);
     }
 
     handleFirstName(first_name) {this.setState({first_name: first_name})}
@@ -31,6 +32,7 @@ class RegistrationForm extends React.Component {
     handleDOB(dob) {this.setState({dob: dob})}
     handleGender(gender) {this.setState({gender: gender})};
     handleEmail(email) {this.setState({email: email})}
+    handleDeleteWarning(newWarning) {this.setState({warning: newWarning})}
     emptyForm() {this.setState({email: '', dob: '', phone_number: '', first_name: '', last_name: '', gender: 'male', warning: ''})}
 
     handleSubmit(e) {
@@ -60,6 +62,7 @@ class RegistrationForm extends React.Component {
                     name="phone_number"
                     placeholder="Phone Number"
                     value={this.state.phone_number}
+                    deleteWarning={this.handleDeleteWarning}
                     onValueChange={this.handlePhoneNumber}
                     required="required"
                     warning={this.state.warning}
@@ -70,16 +73,21 @@ class RegistrationForm extends React.Component {
                     name="first_name"
                     placeholder="First Name"
                     value={this.state.first_name}
+                    deleteWarning={this.handleDeleteWarning}
                     onValueChange={this.handleFirstName}
                     required="required"
+                    warning={this.state.warning}
                 />
 
                 <InputString 
                     type="text" 
+                    name="last_name"
                     placeholder="Last Name"
                     value={this.state.last_name}
+                    deleteWarning={this.handleDeleteWarning}
                     onValueChange={this.handleLastName}
                     required="required"
+                    warning={this.state.warning}
                 />
 
                 <InputString 
@@ -87,6 +95,7 @@ class RegistrationForm extends React.Component {
                     name="date_of_birth"
                     placeholder="Date of Birth"
                     value={this.state.dob}
+                    deleteWarning={this.handleDeleteWarning}
                     onValueChange={this.handleDOB}
                     warning={this.state.warning}
                 />
@@ -98,10 +107,13 @@ class RegistrationForm extends React.Component {
 
                 <InputString 
                     type="email" 
+                    name="email"
                     placeholder="Email"
                     value={this.state.email}
+                    deleteWarning={this.handleDeleteWarning}
                     onValueChange={this.handleEmail}
                     required="required"
+                    warning={this.state.warning}
                 />
 
                 <input className="btn btn-danger" type="submit" value="Register" />
