@@ -47,19 +47,27 @@ class RegistrationController extends Controller
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 200);
         }else{
-
-            Registration::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'gender' => $request->gender,
-                'phone_number' => $request->phone_number,
-                'date_of_birth' => $request->date_of_birth
-            ]);
-
-            return response()->json([
-                "message" => "registration record created"
-            ], 201);
+            try {
+                Registration::create([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'gender' => $request->gender,
+                    'phone_number' => $request->phone_number,
+                    'date_of_birth' => $request->date_of_birth
+                ]);
+    
+                return response()->json([
+                    "message" => "Registration record created"
+                ], 201);
+            } catch (\Illuminate\Database\QueryException $e){
+                $errorCode = $e->errorInfo[1];
+                if($errorCode == 1062){
+                    return response()->json([
+                        "message" => "Duplicate entry for phone number or email"
+                    ], 202);
+                }
+            }
         }
     }
 

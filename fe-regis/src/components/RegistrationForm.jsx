@@ -46,6 +46,7 @@ class RegistrationForm extends React.Component {
             date_of_birth: this.state.dob,
             email: this.state.email
         }).then(res => {
+            console.log(res.status);
             if(res.status === 201){
                 this.emptyForm();
             }else if(res.status === 200){
