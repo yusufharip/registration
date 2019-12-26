@@ -8,6 +8,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .card{
+    padding: 20px 15px;
+
+    h2{
+      padding-bottom: 10px;
+    }
+  }
+
+  .alert-info{
+    &.hide{
+      display: none;
+    }
+  }
 }
 
 code {

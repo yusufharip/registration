@@ -13,7 +13,7 @@ class RegistrationForm extends React.Component {
             dob: '',
             email: '',
             gender: 'male',
-            warning: ''
+            warning: '',
         };
 
         this.handleFirstName = this.handleFirstName.bind(this);
@@ -34,7 +34,6 @@ class RegistrationForm extends React.Component {
     handleEmail(email) {this.setState({email: email})}
     handleDeleteWarning(newWarning) {this.setState({warning: newWarning})}
     emptyForm() {this.setState({email: '', dob: '', phone_number: '', first_name: '', last_name: '', gender: 'male', warning: ''})}
-
     handleSubmit(e) {
         e.preventDefault();
 
@@ -46,79 +45,85 @@ class RegistrationForm extends React.Component {
             date_of_birth: this.state.dob,
             email: this.state.email
         }).then(res => {
-            console.log(res.status);
             if(res.status === 201){
+                this.props.handleAlert(res.data.message);
                 this.emptyForm();
             }else if(res.status === 200){
                 this.setState({warning: res.data});
+            }else if(res.status === 202){
+                this.props.handleAlert(res.data.message);
+                this.setState({warning: ''});
             }
         });
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <InputString
-                    type="text" 
-                    name="phone_number"
-                    placeholder="Phone Number"
-                    value={this.state.phone_number}
-                    deleteWarning={this.handleDeleteWarning}
-                    onValueChange={this.handlePhoneNumber}
-                    required="required"
-                    warning={this.state.warning}
-                />
+            <div className="card">
+                <h2 >Registration</h2>
+                <form onSubmit={this.handleSubmit}>
+                    <InputString
+                        type="text" 
+                        name="phone_number"
+                        placeholder="Phone Number"
+                        value={this.state.phone_number}
+                        deleteWarning={this.handleDeleteWarning}
+                        onValueChange={this.handlePhoneNumber}
+                        required="required"
+                        warning={this.state.warning}
+                    />
 
-                <InputString 
-                    type="text" 
-                    name="first_name"
-                    placeholder="First Name"
-                    value={this.state.first_name}
-                    deleteWarning={this.handleDeleteWarning}
-                    onValueChange={this.handleFirstName}
-                    required="required"
-                    warning={this.state.warning}
-                />
+                    <InputString 
+                        type="text" 
+                        name="first_name"
+                        placeholder="First Name"
+                        value={this.state.first_name}
+                        deleteWarning={this.handleDeleteWarning}
+                        onValueChange={this.handleFirstName}
+                        required="required"
+                        warning={this.state.warning}
+                    />
 
-                <InputString 
-                    type="text" 
-                    name="last_name"
-                    placeholder="Last Name"
-                    value={this.state.last_name}
-                    deleteWarning={this.handleDeleteWarning}
-                    onValueChange={this.handleLastName}
-                    required="required"
-                    warning={this.state.warning}
-                />
+                    <InputString 
+                        type="text" 
+                        name="last_name"
+                        placeholder="Last Name"
+                        value={this.state.last_name}
+                        deleteWarning={this.handleDeleteWarning}
+                        onValueChange={this.handleLastName}
+                        required="required"
+                        warning={this.state.warning}
+                    />
 
-                <InputString 
-                    type="date" 
-                    name="date_of_birth"
-                    placeholder="Date of Birth"
-                    value={this.state.dob}
-                    deleteWarning={this.handleDeleteWarning}
-                    onValueChange={this.handleDOB}
-                    warning={this.state.warning}
-                />
+                    <InputString 
+                        type="date" 
+                        name="date_of_birth"
+                        placeholder="Date of Birth"
+                        value={this.state.dob}
+                        deleteWarning={this.handleDeleteWarning}
+                        onValueChange={this.handleDOB}
+                        warning={this.state.warning}
+                    />
 
-                <InputRadio
-                    gender={this.state.gender}
-                    onValueChange={this.handleGender}
-                />
+                    <InputRadio
+                        gender={this.state.gender}
+                        onValueChange={this.handleGender}
+                    />
 
-                <InputString 
-                    type="email" 
-                    name="email"
-                    placeholder="Email"
-                    value={this.state.email}
-                    deleteWarning={this.handleDeleteWarning}
-                    onValueChange={this.handleEmail}
-                    required="required"
-                    warning={this.state.warning}
-                />
+                    <InputString 
+                        type="email" 
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.email}
+                        deleteWarning={this.handleDeleteWarning}
+                        onValueChange={this.handleEmail}
+                        required="required"
+                        warning={this.state.warning}
+                    />
 
-                <input className="btn btn-danger" type="submit" value="Register" />
-            </form>
+                    <input className="btn btn-danger" type="submit" value="Register" />
+                </form>
+            </div>
         );
     }
 }

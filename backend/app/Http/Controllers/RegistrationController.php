@@ -40,7 +40,7 @@ class RegistrationController extends Controller
             'first_name' => 'required|max:50',
             'last_name' => 'required|max:50',
             'email' => 'required|email',
-            'phone_number' => 'phone:ID',
+            'phone_number' => 'phone:ID, mobile',
             'date_of_birth' => 'date'
         ]);
         

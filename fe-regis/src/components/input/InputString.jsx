@@ -23,7 +23,7 @@ class InputString extends React.Component {
 
         return (
             <div className="form-group">
-                <div className={`warning ${condition}`}>
+                <div className={`warning alert alert-danger ${condition}`}>
                     {this.props.warning[this.props.name]}
                     <button onClick={this.handleClose}>X</button>
                 </div>
