@@ -11,4 +11,6 @@ class Registration extends Model
     protected $fillable = [
         'email', 'phone_number', 'first_name', 'last_name', 'date_of_birth', 'gender'
     ];
+
+    protected $hidden = ['token'];
 }

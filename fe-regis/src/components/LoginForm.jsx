@@ -1,18 +1,41 @@
 import React from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class LoginForm extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
+    constructor(props) {
+        super(props);
+        this.state = {
+            phone_number: ''
+        }
 
-    //     }
-    // }
+        this.handlePhone = this.handlePhone.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-    handleSubmit(){
-        console.log('tes');
+    handlePhone(e) {this.setState({phone_number: e.target.value})}
+
+    handleSubmit(e){
+        e.preventDefault();
+
+        axios.post('http://localhost:7777/api/login', {
+            phone_number: this.state.phone_number,
+        }).then(res => {
+            if(res.status === 201){
+                localStorage.setItem("phone_number", res.data.phone_number);
+                localStorage.setItem("token", res.data.token);
+                window.location.reload();
+            }else if(res.status === 200){
+                console.log(res.data.message);
+            }
+        });
     }
 
     render() {
+        if(localStorage.getItem("token")){
+            return <Redirect to='/home' />
+        }
+
         return (
             <div className="card">
                 <h2 >Login</h2>
@@ -20,6 +43,8 @@ class LoginForm extends React.Component {
                     <div className="form-group">
                         <input 
                             className="form-control"
+                            value={this.state.phone_number}
+                            onChange={this.handlePhone} 
                             type="text"
                             placeholder="Phone Number"
                         />
