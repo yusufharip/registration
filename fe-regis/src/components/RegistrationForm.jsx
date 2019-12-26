@@ -37,6 +37,8 @@ class RegistrationForm extends React.Component {
     emptyForm() {this.setState({email: '', dob: '', phone_number: '', first_name: '', last_name: '', gender: 'male', warning: ''})}
     handleSubmit(e) {
         e.preventDefault();
+        // this.props.handleLoginButtonVisibility('show');
+        // this.setState({disable: 'disabled'});
         axios.post('http://localhost:7777/api/registration', {
             first_name: this.state.first_name,
             last_name: this.state.last_name,

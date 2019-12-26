@@ -21,6 +21,7 @@ class CreateRegistrationTable extends Migration
             $table->string('last_name');
             $table->string('gender')->default('male');
             $table->date('date_of_birth');
+            $table->string('token')->length(15)->nullable();
             $table->timestamps();
         });
     }

@@ -22,3 +22,15 @@ use Illuminate\Http\Request;
 Route::post('/registration', [
     'uses' => 'RegistrationController@store',
 ]);
+
+Route::post('/login', [
+    'uses' => 'RegistrationController@login',
+]);
+
+Route::post('/logout', [
+    'uses' => 'RegistrationController@logout',
+]);
+
+Route::post('/home', [
+    'uses' => 'RegistrationController@index',
+]);
