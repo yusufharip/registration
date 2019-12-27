@@ -68,9 +68,9 @@ class AfterLogin extends React.Component {
         })
 
         return (
-            <div className="card">
-                <h2>Homepage</h2>
-                <button className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
+            <div className="card after-login">
+                <h2 className="d-inline-block">Homepage</h2>
+                <button type="button" className="btn btn-danger d-inline-block" onClick={this.handleLogout}>Logout</button>
 
                 <table className="table">
                     <thead>
