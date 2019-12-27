@@ -39,7 +39,7 @@ class RegistrationForm extends React.Component {
         e.preventDefault();
         // this.props.handleLoginButtonVisibility('show');
         // this.setState({disable: 'disabled'});
-        axios.post('http://localhost:7777/api/registration', {
+        axios.post('https://regis-backend.hubme.xyz/api/registration', {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             phone_number: this.state.phone_number,
