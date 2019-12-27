@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
 
-        axios.post('https://regis-backend.hubme.xyz/api/login', {
+        axios.post('http://localhost:7777/api/login', {
             phone_number: this.state.phone_number,
         }).then(res => {
             if(res.status === 201){
