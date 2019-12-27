@@ -21,7 +21,7 @@ class RegistrationController extends Controller
         if($find_number->token == $request->token){
             $all_user = Registration::all();
             return response()->json([
-                "data" => $all_user
+                "users" => $all_user
             ], 201);
         }else{
             return response()->json([
