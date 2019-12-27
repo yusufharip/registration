@@ -16,7 +16,7 @@ class AfterLogin extends React.Component {
     handleLogout(e) {
         e.preventDefault();
 
-        axios.post('https://regis-backend.hubme.xyz/api/logout', {
+        axios.post('http://localhost:7777/api/logout', {
             phone_number: localStorage.getItem("phone_number"),
         }).then(res => {
             if (res.status === 201) {
@@ -31,7 +31,7 @@ class AfterLogin extends React.Component {
     }
 
     handleData() {
-        axios.post('https://regis-backend.hubme.xyz/api/home', {
+        axios.post('http://localhost:7777/api/home', {
             phone_number: localStorage.getItem("phone_number"),
             token: localStorage.getItem("token"),
         }).then(res => {
