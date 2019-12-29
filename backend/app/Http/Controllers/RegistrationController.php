@@ -76,9 +76,16 @@ class RegistrationController extends Controller
                 ], 201);
             } catch (\Illuminate\Database\QueryException $e){
                 $errorCode = $e->errorInfo[1];
-                if($errorCode == 1062){
+
+                if($errorCode == 1062 || $errorCode == 7){
+                    if(strpos($e->errorInfo[2], 'phone_number')){
+                        $message = "Your phone number already exist";
+                    } else{
+                        $message = "Your email already exist";
+                    }
+
                     return response()->json([
-                        "message" => "Duplicate entry for phone number or email"
+                        "message" => $message
                     ], 202);
                 }
             }

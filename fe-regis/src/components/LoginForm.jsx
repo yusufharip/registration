@@ -18,13 +18,13 @@ class LoginForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
 
-        axios.post('http://localhost:7777/api/login', {
+        axios.post('https://regis-backend.hubme.xyz/api/login', {
             phone_number: this.state.phone_number,
         }).then(res => {
             if(res.status === 201){
                 localStorage.setItem("phone_number", res.data.phone_number);
                 localStorage.setItem("token", res.data.token);
-                window.location.reload();
+                this.props.handleLoginToken();
             }else if(res.status === 200){
                 console.log(res.data.message);
             }
@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        if(localStorage.getItem("token")){
+        if(this.props.token){
             return <Redirect to='/home' />
         }
 

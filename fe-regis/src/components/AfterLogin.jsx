@@ -16,14 +16,13 @@ class AfterLogin extends React.Component {
     handleLogout(e) {
         e.preventDefault();
 
-        axios.post('http://localhost:7777/api/logout', {
-            phone_number: localStorage.getItem("phone_number"),
+        axios.post('https://regis-backend.hubme.xyz/api/logout', {
+            phone_number: this.props.phone_number
         }).then(res => {
             if (res.status === 201) {
-                console.log(res.data.message);
                 localStorage.setItem("phone_number", '');
                 localStorage.setItem("token", '');
-                window.location.reload();
+                this.props.handleLoginToken();
             } else if (res.status === 200) {
                 console.log(res.data.message);
             }
@@ -31,9 +30,9 @@ class AfterLogin extends React.Component {
     }
 
     handleData() {
-        axios.post('http://localhost:7777/api/home', {
-            phone_number: localStorage.getItem("phone_number"),
-            token: localStorage.getItem("token"),
+        axios.post('https://regis-backend.hubme.xyz/api/home', {
+            phone_number: this.props.phone_number,
+            token: this.props.token
         }).then(res => {
             if (res.status === 201) {
                 this.setState({users: res.data.users})
@@ -44,13 +43,13 @@ class AfterLogin extends React.Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem("token")) {
+        if (this.props.token) {
             this.handleData();
         }
     }
 
     render() {
-        if (!localStorage.getItem("token")) {
+        if (this.props.token === '') {
             return <Redirect to='/register' />
         }
 
